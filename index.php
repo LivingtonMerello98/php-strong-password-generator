@@ -1,21 +1,7 @@
 <?php
 
-
-//la funzione prenderà come parametro la il valore in GET
-//range caratteri x pass. lunghezza del range. string vuota per new pass
-function password_gen($value)
-{
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    $len_chars = strlen($chars);
-    $random_password = '';
-
-    for ($i = 0; $i < $value; $i++) {
-        $random_password .= $chars[rand(0, $len_chars - 1)];
-    }
-
-    return $random_password;
-}
-
+//file function importato
+include __DIR__ . '/functions.php';
 
 //intercettiamo l'arrivo della variabile isset()
 //'?' op. ternario, se arriva il parametro applichiamo intval() else lasciamo  vuoto
@@ -32,6 +18,7 @@ if ($password_length > 0) {
 
 var_dump($password_length);
 var_dump($password_generated);
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +38,7 @@ var_dump($password_generated);
         <button type="submit">invia</button>
     </form>
     <!--stampiamo il valore-->
-    <?php if ($password_generated) :  ?>
+    <?php if (!empty($password_generated)) :  ?>
 
         <h2>La password generata è:</h2>
 
