@@ -1,4 +1,6 @@
 <?php
+//inizio sessione
+session_start();
 // file function importato
 include __DIR__ . '/functions.php';
 
@@ -9,6 +11,12 @@ $password_generated = '';
 
 if ($password_length > 0) {
     $password_generated = password_gen($password_length);
+
+    //salviamo nell array globale $session[] la password generata
+    $_SESSION['password_generated'] = $password_generated;
+    // Redirect alla nuova pagina
+    header('Location: password_gen.php');
+    exit();
 }
 ?>
 
@@ -19,7 +27,7 @@ if ($password_length > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>php-strong-password-generator</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body class="bg-dark">
@@ -38,12 +46,6 @@ if ($password_length > 0) {
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Genera Password</button>
                         </form>
-                        <?php if (!empty($password_generated)) : ?>
-                            <div class="alert alert-danger text-center mt-4" role="alert">
-                                <h4 class="alert-heading">La password generata è:</h4>
-                                <p><?php echo htmlspecialchars($password_generated); ?></p>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
