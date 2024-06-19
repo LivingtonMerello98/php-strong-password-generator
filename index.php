@@ -5,6 +5,19 @@
 
 $password_length = isset($_GET['length-password']) ? intval($_GET['length-password']) : 0;
 
+//la funzione prenderà come parametro la il valore in GET
+//range caratteri x pass. lunghezza del range. string vuota per new pass
+function password_gen($value)
+{
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    $len_chars = strlen($chars);
+    $password = '';
+
+    for ($i = 0; $i < $value; $i++) {
+        $password .= $chars[rand(0, $len_chars - 1)];
+    }
+}
+
 var_dump($password_length);
 ?>
 
